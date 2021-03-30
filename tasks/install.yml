@@ -10,10 +10,17 @@
 - name: install acme.sh
   become: True
   shell: INSTALLONLINE=1 /tmp/acme.sh
+           --install
            --home "{{ letsencrypt_base_dir }}"
   args:
     chdir: "/tmp"
   when: download.changed
+
+- name: Ensure deploy-directory exists
+  file:
+    path: "{{ letsencrypt_base_dir }}/deploy"
+    state: directory
+  become: true
 
 - name: install deploy scripts
   become: True
