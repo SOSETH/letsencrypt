@@ -2,7 +2,7 @@
 - name: issue the certificate (webroot)
   become: True
   command: >
-    {{ letsencrypt_base_dir }}/acme.sh --issue
+    {{ letsencrypt_base_dir }}/acme.sh --issue --server letsencrypt
       -d "{{ letsencrypt_domain }}"
       {% for item in letsencrypt_domain_extra %} -d {{ item }}{% endfor %}
       {{ '--staging' if letsencrypt_staging else None }}
@@ -18,7 +18,7 @@
 - name: issue the certificate (standalone)
   become: True
   command: >
-    {{ letsencrypt_base_dir }}/acme.sh --issue
+    {{ letsencrypt_base_dir }}/acme.sh --issue --server letsencrypt
       -d "{{ letsencrypt_domain }}"
       {% for item in letsencrypt_domain_extra %} -d {{ item }}{% endfor %}
       {{ '--staging' if letsencrypt_staging else None }}
