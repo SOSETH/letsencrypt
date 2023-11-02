@@ -10,6 +10,7 @@
       -w "{{ letsencrypt_webroot }}"
       --pre-hook "{{ letsencrypt_issue.prehook }}"
       --post-hook "{{ letsencrypt_issue.posthook }}"
+      --renew-hook "{{ letsencrypt_issue.renewhook }}"
   register: issue_web
   failed_when: issue_web.rc == 1
   changed_when: issue_web.rc == 0
@@ -27,6 +28,7 @@
       --httpport {{ letsencrypt_port }}
       --pre-hook "{{ letsencrypt_issue.prehook }}"
       --post-hook "{{ letsencrypt_issue.posthook }}"
+      --renew-hook "{{ letsencrypt_issue.renewhook }}"
   register: issue_standalone
   failed_when: issue_standalone.rc == 1
   changed_when: issue_standalone.rc == 0
